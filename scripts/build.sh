@@ -25,8 +25,9 @@ import re, sys
 text = open("PKGBUILD").read()
 open("PKGBUILD", "w").write(re.sub(r"b2sums=\(.*?\)\n", sys.argv[1] + "\n", text, flags=re.S))
 PY
-if [ -n "$(git status --porcelain)" ]; then
-    git add -A
+# Only files already here: PKGBUILD and the ones copied from Arch (never makepkg's downloads)
+if ! git diff --quiet; then
+    git add -u
     git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
         commit -q -m "Follow Arch's packaging $tag"
     git push -q origin HEAD

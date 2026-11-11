@@ -1,6 +1,6 @@
 # makepkg's downloads, build folders and packages
-*/src/
-*/pkg/
-*/gtk/
+/gtk/
+/src/
+/pkg/
 *.pkg.tar.*
 *.log
