@@ -1,0 +1,37 @@
+name: Build
+
+# Daily: follows Arch's packaging and builds the package when its version is new. The signed
+# [mabos] repository (mabasterYT/mabos-packages) picks it up from the "package" release.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Build even when this version is built
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    timeout-minutes: 120
+    steps:
+      - name: Git for the checkout
+        run: pacman -Sy --noconfirm --needed git
+      - uses: actions/checkout@v4
+      - name: Build
+        run: scripts/build.sh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FORCE: ${{ inputs.force && '1' || '0' }}
