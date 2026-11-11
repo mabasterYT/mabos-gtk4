@@ -1,6 +1,6 @@
 # MabOS's GTK 4: Arch's gtk4 with one patch, mabos-user-css-live-reload.patch: open windows read the
 # user's ~/.config/gtk-4.0/gtk.css again when it changes, so a theme switch reaches running apps.
-# PKGBUILD is made from this template by scripts/update-gtk4.py, which follows Arch's packaging
+# PKGBUILD is made from this template by scripts/update.py (package.conf), which follows Arch's packaging
 # (gitlab.archlinux.org/archlinux/packaging/packages/gtk4, the tag in _arch_tag): version and
 # dependencies come from there. Only the gtk4 package is built: demos, docs and tests are left out,
 # and gtk-update-icon-cache stays Arch's. `pacman -S gtk4` goes back to Arch's.
@@ -11,7 +11,7 @@ _arch_epoch=1
 pkgver=4.24.1
 pkgrel=1
 pkgdesc="GObject-based multi-platform GUI toolkit (MabOS: the user's gtk.css reloads live)"
-url="https://github.com/mabasterYT/mabos-packages"
+url="https://github.com/mabasterYT/mabos-gtk4"
 arch=(x86_64)
 license=(LGPL-2.1-or-later)
 depends=(
@@ -85,7 +85,10 @@ source=(
   gtk4-querymodules.{hook,script}
   mabos-user-css-live-reload.patch
 )
-b2sums=('SKIP' 'SKIP' 'SKIP')
+b2sums=('824667f399ee085521f149f5ed2bffeb52a72034dc59f25fc88beeefb567a37e70f30ec911e39a9b5b29ca8961795555c46d50a3b1d4e8dd5d9dd0b2e021ef5b'
+        'dd589bd1ad2b13f0e06f6899776a083f20a1aac24d4308d666ffd0d1cff38457b8257b8366f92e767b4233b3d86b6b54fa50339faf84c4801a824986366dce30'
+        '4b90eb8d582509b09aab401313d4399cc139ad21b5dd7d45d79860d0764c7494c60714e0794e09823e51d1894ac032a994f27d79d1499abf24ee6f59bdb0c243'
+        'e534a40073398e107d8ea1562b39ee7e589afc36daebceb1e8163f15cc9476a33119cff97688a930818d8eeebe324674b981c3fc14ce8e6e2d26fa3eb600ae18')
 
 prepare() {
   cd gtk
